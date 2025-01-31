@@ -18,9 +18,6 @@ const server = http.createServer((req, res) => {
         res.end('Pong!');
     } else if (req.url === '/webhook') {
         // Fetch client id.
-        //var clientid = req.headers['X-ADOBESIGN-CLIENTID'];
-        //Validate it
-
         let clientid = req.headers['X-ADOBESIGN-CLIENTID'] || '';
         if (!clientid) {
             clientid = req.headers['x-adobesign-clientid'] || '';
@@ -29,16 +26,15 @@ const server = http.createServer((req, res) => {
         // Collect the body data
         let body = '';
 
-        // Listen for data events
         req.on('data', chunk => {
             body += chunk;
         });
 
-        // Once the entire body is received, log it
         req.on('end', () => {
-            console.log('Request body:', body); // Logs the body
+            console.log('Request body:');
+            console.log(body);
 
-            // Handle the response as before
+            //Validate client id
             if (clientid === "UB7E5BXCXY" || 1 == 1) { // Replace '1 == 1' with proper logic
                 res.setHeader('X-AdobeSign-ClientId', clientid);
                 res.statusCode = 200;
@@ -47,7 +43,6 @@ const server = http.createServer((req, res) => {
             res.end();
         });
 
-        // Handle errors if any
         req.on('error', (err) => {
             console.error('Error reading request body:', err);
             res.statusCode = 500;
