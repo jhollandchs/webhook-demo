@@ -23,6 +23,8 @@ const server = http.createServer((req, res) => {
 
         var clientid = "BGBQIIE7H253K6";
 
+        console.log('hello...');
+
         // console.log('clientid');
         // console.log(clientid);
         // console.log('/clientid');
