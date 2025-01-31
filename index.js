@@ -6,17 +6,22 @@ const port = process.env.PORT || 3000;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
-    // Set the response headers
-    res.setHeader('Content-Type', 'text/plain');
-    
+   
     // Handle different routes
     if (req.url === '/') {
+        res.setHeader('Content-Type', 'text/html');
         res.statusCode = 200;
-        res.end('Hello, World!');
+        res.end('<html><body><h1>Hello!</h1><p>You have reached the default page of your app!</p></body></html>');
+    } else if (req.url === '/ping') {
+        res.setHeader('Content-Type', 'text/plain');
+        res.statusCode = 200;
+        res.end('Pong!');
     } else if (req.url === '/webhook') {
+        res.setHeader('Content-Type', 'text/plain');
         res.statusCode = 200;
         res.end('webhook response data!');
     } else {
+        res.setHeader('Content-Type', 'text/plain');
         res.statusCode = 404;
         res.end('Page not found');
     }
