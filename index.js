@@ -24,27 +24,24 @@ const server = http.createServer((req, res) => {
         const headers = req.headers;
         console.log('Request headers:', headers);
 
-        var clientid = "BGBQIIE7H253K6";
+        let clientid = req.headers['X-ADOBESIGN-CLIENTID'] || '';
+        if (!clientid) {
+            clientid = req.headers['x-adobesign-clientid'] || '';
+        }
 
         console.log('clientid...');
         console.log(clientid);
         console.log('...clientid');
 
-        if (clientid ==="BGBQIIE7H253K6" || 1 == 1) //Replace 'BGBQIIE7H253K6' with the client id of the application using which the webhook is created
+        // Account ID: CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG
+        if (clientid ==="CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG" || 1 == 1) //Replace 'BGBQIIE7H253K6' with the client id of the application using which the webhook is created
         {
             //Return it in response header
-            //res.headers['X-AdobeSign-ClientId'] = clientid;
             res.setHeader('X-AdobeSign-ClientId', clientid);
             res.statusCode = 200;
-            //res.status = 200;  // default value
-
         }
 
         res.end();
-
-        //res.setHeader('Content-Type', 'text/plain');
-        //res.statusCode = 200;
-        //res.end('webhook response data!');
     } else {
         res.setHeader('Content-Type', 'text/plain');
         res.statusCode = 404;
