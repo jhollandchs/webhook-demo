@@ -21,6 +21,7 @@ const server = http.createServer((req, res) => {
         //var clientid = req.headers['X-ADOBESIGN-CLIENTID'];
         //Validate it
 
+        const headers = req.headers;
         console.log('Request headers:', headers);
 
         var clientid = "BGBQIIE7H253K6";
