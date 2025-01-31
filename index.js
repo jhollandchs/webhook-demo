@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
         res.statusCode = 200;
         res.end('Pong!');
     } else if (req.url === '/webhook') {
-        // Fetch client id
+        // Fetch client id.
         //var clientid = req.headers['X-ADOBESIGN-CLIENTID'];
         //Validate it
 
