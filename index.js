@@ -1,8 +1,8 @@
 // Import the built-in http module
 const http = require('http');
 
-// Define the port to listen on
-const port = 3000;
+// Use the port from the environment or fallback to 3000 for local development
+const port = process.env.PORT || 3000;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
