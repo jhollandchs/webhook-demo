@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
-   
+  
     // Handle different routes
     if (req.url === '/') {
         res.setHeader('Content-Type', 'text/html');
@@ -21,13 +21,13 @@ const server = http.createServer((req, res) => {
         //var clientid = req.headers['X-ADOBESIGN-CLIENTID'];
         //Validate it
 
+        console.log('Request headers:', headers);
+
         var clientid = "BGBQIIE7H253K6";
 
-        console.log('hello...');
-
-        // console.log('clientid');
-        // console.log(clientid);
-        // console.log('/clientid');
+        console.log('clientid...');
+        console.log(clientid);
+        console.log('...clientid');
 
         if (clientid ==="BGBQIIE7H253K6" || 1 == 1) //Replace 'BGBQIIE7H253K6' with the client id of the application using which the webhook is created
         {
