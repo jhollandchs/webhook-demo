@@ -34,6 +34,8 @@ const server = http.createServer((req, res) => {
         console.log('...clientid');
 
         // Account ID: CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG
+        // This is found in Account settings. Open sandbox, navigate to Account header link at: https://secure.na1.adobesignsandbox.com/account/accountSettingsPage#pageId::ACCOUNT_SETTINGS
+        // It is the first value at the top of the page.
         if (clientid ==="CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG" || 1 == 1) //Replace 'BGBQIIE7H253K6' with the client id of the application using which the webhook is created
         {
             //Return it in response header
