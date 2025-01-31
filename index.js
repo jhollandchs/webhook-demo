@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 
 // Create the HTTP server
 const server = http.createServer((req, res) => {
-  
+
     // Handle different routes
     if (req.url === '/') {
         res.setHeader('Content-Type', 'text/html');
@@ -21,29 +21,38 @@ const server = http.createServer((req, res) => {
         //var clientid = req.headers['X-ADOBESIGN-CLIENTID'];
         //Validate it
 
-        const headers = req.headers;
-        console.log('Request headers:', headers);
-
         let clientid = req.headers['X-ADOBESIGN-CLIENTID'] || '';
         if (!clientid) {
             clientid = req.headers['x-adobesign-clientid'] || '';
         }
 
-        console.log('clientid...');
-        console.log(clientid);
-        console.log('...clientid');
+        // Collect the body data
+        let body = '';
 
-        // Account ID: CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG
-        // This is found in Account settings. Open sandbox, navigate to Account header link at: https://secure.na1.adobesignsandbox.com/account/accountSettingsPage#pageId::ACCOUNT_SETTINGS
-        // It is the first value at the top of the page.
-        if (clientid ==="CBJCHBCAABAAUGQsdVqbxpASkjr2bHguvHogJFEMlmbG" || 1 == 1) //Replace 'BGBQIIE7H253K6' with the client id of the application using which the webhook is created
-        {
-            //Return it in response header
-            res.setHeader('X-AdobeSign-ClientId', clientid);
-            res.statusCode = 200;
-        }
+        // Listen for data events
+        req.on('data', chunk => {
+            body += chunk;
+        });
 
-        res.end();
+        // Once the entire body is received, log it
+        req.on('end', () => {
+            console.log('Request body:', body); // Logs the body
+
+            // Handle the response as before
+            if (clientid === "UB7E5BXCXY" || 1 == 1) { // Replace '1 == 1' with proper logic
+                res.setHeader('X-AdobeSign-ClientId', clientid);
+                res.statusCode = 200;
+            }
+
+            res.end();
+        });
+
+        // Handle errors if any
+        req.on('error', (err) => {
+            console.error('Error reading request body:', err);
+            res.statusCode = 500;
+            res.end('Internal Server Error');
+        });
     } else {
         res.setHeader('Content-Type', 'text/plain');
         res.statusCode = 404;
